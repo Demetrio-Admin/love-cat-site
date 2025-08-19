@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Признание в любви Димочке Котенку</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: 
+        linear-gradient(rgba(255,192,203,0.6), rgba(255,192,203,0.6)),
+        url('https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&q=80&w=1200') repeat;
+      background-size: 400px;
+      color: #ff4d88;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px #fff0f5;
+      background: rgba(255, 240, 245, 0.8);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+    .hearts {
+      font-size: 2em;
+      cursor: pointer;
+      user-select: none;
+    }
+    .heart-count {
+      font-size: 1.2em;
+      margin-top: 5px;
+    }
+    .messages {
+      margin-top: 30px;
+      background: rgba(255, 240, 245, 0.9);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .messages p {
+      background: #ffe6f0;
+      padding: 10px;
+      border-radius: 15px;
+      margin: 10px 0;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: #ff4d88;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+    input, button {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+    }
+    button {
+      background: #ff80b3;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ff4d88;
+    }
+    .cat-img {
+      max-width: 150px;
+      margin-top: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .falling-heart {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Димочка Котёнок, я тебя люблю! 💖</h1>
+  <img class="cat-img" src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&q=80&w=400" alt="Милый котик">
+
+  <div class="hearts" onclick="addHeart()">❤️</div>
+  <div class="heart-count">Сердечки: <span id="heartCounter">0</span></div>
+
+  <div class="messages">
+    <h2>Твои признания 💌</h2>
+    <div id="messagesList"></div>
+    <input type="text" id="messageInput" placeholder="Напиши признание...">
+    <button onclick="addMessage()">Отправить</button>
+  </div>
+
+  <script>
+    let heartCounter = 0;
+
+    function addHeart() {
+      heartCounter++;
+      document.getElementById('heartCounter').textContent = heartCounter;
+      createFallingHeart();
+    }
+
+    function createFallingHeart() {
+      const heart = document.createElement('div');
+      heart.textContent = '💖';
+      heart.classList.add('falling-heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    function addMessage() {
+      const input = document.getElementById('messageInput');
+      const text = input.value.trim();
+      if(text !== "") {
+        const p = document.createElement('p');
+        const span = document.createElement('span');
+        span.textContent = "💖 " + text;
+
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '✖';
+        delBtn.className = 'delete-btn';
+        delBtn.onclick = () => p.remove();
+
+        p.appendChild(span);
+        p.appendChild(delBtn);
+        document.getElementById('messagesList').appendChild(p);
+        input.value = "";
+      }
+    }
+  </script>
+</body>
+</html>
