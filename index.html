@@ -7,14 +7,16 @@
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      color: #ff4d88;
+      overflow-x: hidden;
       background: 
         linear-gradient(rgba(255,192,203,0.6), rgba(255,192,203,0.6)),
-        url('https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&q=80&w=1200') repeat;
-      background-size: 400px;
-      color: #ff4d88;
-      text-align: center;
-      padding: 20px;
-      overflow-x: hidden;
+        url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&q=80&w=1200') repeat;
+      background-size: cover;
+      background-position: center;
     }
     h1 {
       font-size: 2.5em;
@@ -24,6 +26,8 @@
       display: inline-block;
       padding: 10px 20px;
       border-radius: 20px;
+      max-width: 90%;
+      word-wrap: break-word;
     }
     .hearts {
       font-size: 2em;
@@ -40,7 +44,7 @@
       padding: 15px;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      max-width: 500px;
+      max-width: 90%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -53,6 +57,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
     .delete-btn {
       background: transparent;
@@ -67,6 +72,8 @@
       border-radius: 10px;
       border: none;
       margin-top: 10px;
+      max-width: 80%;
+      box-sizing: border-box;
     }
     button {
       background: #ff80b3;
@@ -78,7 +85,8 @@
       background: #ff4d88;
     }
     .cat-img {
-      max-width: 150px;
+      max-width: 100%;
+      height: auto;
       margin-top: 15px;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -96,11 +104,16 @@
         opacity: 0;
       }
     }
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      .hearts { font-size: 1.5em; }
+      .heart-count { font-size: 1em; }
+    }
   </style>
 </head>
 <body>
   <h1>💖 Димочка Котёнок, я тебя люблю! 💖</h1>
-  <img class="cat-img" src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&q=80&w=400" alt="Милый котик">
+  <img class="cat-img" src="https://placekitten.com/400/400" alt="Милый котик">
 
   <div class="hearts" onclick="addHeart()">❤️</div>
   <div class="heart-count">Сердечки: <span id="heartCounter">0</span></div>
@@ -156,3 +169,4 @@
   </script>
 </body>
 </html>
+
