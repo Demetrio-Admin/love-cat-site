@@ -14,7 +14,7 @@
       overflow-x: hidden;
       background: 
         linear-gradient(rgba(255,192,203,0.6), rgba(255,192,203,0.6)),
-        url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&q=80&w=1200') repeat;
+        url('https://placekitten.com/1200/800') repeat;
       background-size: cover;
       background-position: center;
     }
@@ -85,11 +85,15 @@
       background: #ff4d88;
     }
     .cat-img {
-      max-width: 100%;
+      width: 100%;
+      max-width: 500px;
       height: auto;
       margin-top: 15px;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .falling-heart {
       position: fixed;
@@ -113,7 +117,7 @@
 </head>
 <body>
   <h1>💖 Димочка Котёнок, я тебя люблю! 💖</h1>
-  <img class="cat-img" src="https://placekitten.com/400/400" alt="Милый котик">
+  <img class="cat-img" src="https://placekitten.com/600/600" alt="Милый котик">
 
   <div class="hearts" onclick="addHeart()">❤️</div>
   <div class="heart-count">Сердечки: <span id="heartCounter">0</span></div>
@@ -169,4 +173,3 @@
   </script>
 </body>
 </html>
-
