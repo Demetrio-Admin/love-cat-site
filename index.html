@@ -1,124 +1,101 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Признание в любви Димочке Котенку</title>
   <style>
-    body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-      color: #ff4d88;
-      overflow-x: hidden;
-      background: 
+    /* Базовая сетка: шапка сверху, центрируемый блок посередине, остальное ниже */
+    body{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      font-family:'Comic Sans MS', cursive, sans-serif;
+      background:
         linear-gradient(rgba(255,192,203,0.6), rgba(255,192,203,0.6)),
-        url('https://placekitten.com/1200/800') repeat;
-      background-size: cover;
-      background-position: center;
+        url('https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&q=80&w=1200') repeat;
+      background-size:400px;
+      color:#ff4d88;
+      text-align:center;
+      padding:20px;
+      overflow-x:hidden;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px #fff0f5;
-      background: rgba(255, 240, 245, 0.8);
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 20px;
-      max-width: 90%;
-      word-wrap: break-word;
+
+    h1{
+      font-size:2.5em;
+      margin-bottom:10px;
+      text-shadow:2px 2px #fff0f5;
+      background:rgba(255,240,245,0.8);
+      display:inline-block;
+      padding:10px 20px;
+      border-radius:20px;
+      align-self:center; /* центрируем заголовок в строке */
     }
-    .hearts {
-      font-size: 2em;
-      cursor: pointer;
-      user-select: none;
+
+    /* === Центровка картинки на экране === */
+    .hero{
+      flex:1;                        /* занимает всё доступное пространство между шапкой и нижним контентом */
+      display:flex;
+      align-items:center;             /* вертикальный центр */
+      justify-content:center;         /* горизонтальный центр */
     }
-    .heart-count {
-      font-size: 1.2em;
-      margin-top: 5px;
+    .cat-img{
+      display:block;
+      max-width:150px;
+      margin:0;                       /* центр даёт flex-контейнер */
+      border-radius:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
     }
-    .messages {
-      margin-top: 30px;
-      background: rgba(255, 240, 245, 0.9);
-      padding: 15px;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
+
+    .hearts{ font-size:2em; cursor:pointer; user-select:none; }
+    .heart-count{ font-size:1.2em; margin-top:5px; }
+
+    .messages{
+      margin-top:30px;
+      background:rgba(255,240,245,0.9);
+      padding:15px;
+      border-radius:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      max-width:500px;
+      margin-left:auto;
+      margin-right:auto;
     }
-    .messages p {
-      background: #ffe6f0;
-      padding: 10px;
-      border-radius: 15px;
-      margin: 10px 0;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+    .messages p{
+      background:#ffe6f0;
+      padding:10px;
+      border-radius:15px;
+      margin:10px 0;
+      text-align:left;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    .delete-btn {
-      background: transparent;
-      border: none;
-      color: #ff4d88;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1.2em;
+    .delete-btn{
+      background:transparent; border:none; color:#ff4d88;
+      font-weight:bold; cursor:pointer; font-size:1.2em;
     }
-    input, button {
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      margin-top: 10px;
-      max-width: 80%;
-      box-sizing: border-box;
+    input,button{ padding:10px; border-radius:10px; border:none; margin-top:10px; }
+    button{ background:#ff80b3; color:#fff; font-weight:bold; cursor:pointer; }
+    button:hover{ background:#ff4d88; }
+
+    .falling-heart{
+      position:fixed; top:-50px; font-size:24px;
+      animation:fall linear forwards; pointer-events:none;
     }
-    button {
-      background: #ff80b3;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #ff4d88;
-    }
-    .cat-img {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
-      margin-top: 15px;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .falling-heart {
-      position: fixed;
-      top: -50px;
-      font-size: 24px;
-      animation: fall linear forwards;
-      pointer-events: none;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      .hearts { font-size: 1.5em; }
-      .heart-count { font-size: 1em; }
-    }
+    @keyframes fall{ to{ transform:translateY(110vh); opacity:0; } }
   </style>
 </head>
 <body>
   <h1>💖 Димочка Котёнок, я тебя люблю! 💖</h1>
-  <img class="cat-img" src="https://placekitten.com/600/600" alt="Милый котик">
 
+  <!-- Центр экрана -->
+  <section class="hero">
+    <img class="cat-img"
+         src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&q=80&w=400"
+         alt="Милый котик"/>
+  </section>
+
+  <!-- Остальной контент ниже -->
   <div class="hearts" onclick="addHeart()">❤️</div>
   <div class="heart-count">Сердечки: <span id="heartCounter">0</span></div>
 
@@ -131,43 +108,32 @@
 
   <script>
     let heartCounter = 0;
-
-    function addHeart() {
+    function addHeart(){
       heartCounter++;
       document.getElementById('heartCounter').textContent = heartCounter;
       createFallingHeart();
     }
-
-    function createFallingHeart() {
+    function createFallingHeart(){
       const heart = document.createElement('div');
-      heart.textContent = '💖';
+      heart.textContent='💖';
       heart.classList.add('falling-heart');
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+      heart.style.left = Math.random()*window.innerWidth+'px';
+      heart.style.animationDuration = (2+Math.random()*3)+'s';
       document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      setTimeout(()=>heart.remove(),5000);
     }
-
-    function addMessage() {
+    function addMessage(){
       const input = document.getElementById('messageInput');
       const text = input.value.trim();
-      if(text !== "") {
-        const p = document.createElement('p');
-        const span = document.createElement('span');
-        span.textContent = "💖 " + text;
-
-        const delBtn = document.createElement('button');
-        delBtn.textContent = '✖';
-        delBtn.className = 'delete-btn';
-        delBtn.onclick = () => p.remove();
-
-        p.appendChild(span);
-        p.appendChild(delBtn);
+      if(text!==""){
+        const p=document.createElement('p');
+        const span=document.createElement('span'); span.textContent="💖 "+text;
+        const delBtn=document.createElement('button');
+        delBtn.textContent='✖'; delBtn.className='delete-btn';
+        delBtn.onclick=()=>p.remove();
+        p.appendChild(span); p.appendChild(delBtn);
         document.getElementById('messagesList').appendChild(p);
-        input.value = "";
+        input.value="";
       }
     }
   </script>
